@@ -1,0 +1,282 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Home Screen</title>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif;}
+body, html {
+  height: 100%;
+  color: #777;
+  line-height: 1.8;
+}
+
+.bgimg-1 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 90% 800px;
+  background-image: url("{% static 'frame_1.gif' %}");
+  min-height: 100%;
+}
+
+.bgimg-2 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40% 400px;
+  background-image: url("{% static 'frame_2.gif' %}");
+  min-height: 400px;
+}
+
+.bgimg-3 {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 10% 150px;
+  background-image: url("{% static 'frame_3.gif' %}");
+  min-height: 400px;
+}
+
+.w3-wide {letter-spacing: 10px;}
+.w3-hover-opacity {cursor: pointer;}
+
+/* Turn off parallax scrolling for tablets and phones */
+@media only screen and (max-device-width: 1600px) {
+  .bgimg-1, .bgimg-2, .bgimg-3 {
+    background-attachment: scroll;
+    min-height: 1000px;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="w3-top">
+  <div class="w3-bar" id="myNavbar">
+    <a href="#home" class="w3-bar-item w3-button"><i class="fa fa-home"></i> HOME</a> 
+    {% if not user.is_authenticated %}
+    <a href="/admin" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-laptop"></i> ADMIN LOGIN</a>
+    <a href="/AUTHENTICATION/login" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> USER LOGIN</a>
+    {% endif%}
+    {% if user.is_authenticated %}
+    <a href="/AUTHENTICATION/logout" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> USER LOGOUT</a>
+    {% endif%}
+  </div>
+
+  <div id="navDemo" class="w3-bar-block w3-white w3-hide w3-hide-large w3-hide-medium">
+    {% if not user.is_authenticated %}
+    <a href="/admin" class="w3-bar-item w3-button" onclick="toggleFunction()">ADMIN LOGIN</a>
+    <a href="/AUTHENTICATION/login" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> USER LOGIN</a>
+    {% endif%}
+    {% if user.is_authenticated %}
+    <a href="/AUTHENTICATION/logout" class="w3-bar-item w3-button w3-hide-small"><i class="fa fa-user"></i> USER LOGOUT</a>
+    {% endif%}
+  </div>
+</div>
+
+<div class="bgimg-1 w3-display-container w3-opacity-min" id="home">
+{% if messages %}
+<div class="w3-display-middle w3-padding w3-hide-small" style="width:15% ">
+<div class="w3-black w3-opacity w3-hover-opacity-off w3-padding-large w3-round-large">
+<p> {% for message in messages %}
+    {{ message }}
+    {% endfor %}
+</p>
+</div>
+</div>
+{% endif %}
+
+{% if user.is_authenticated %}
+    <div class="w3-display-middle w3-padding w3-hide-small" style="width:30% ">
+      <div class="w3-black w3-opacity w3-hover-opacity-off w3-padding-large w3-round-large">
+        <h1 class="w3-xlarge w3-center">Main Screen Pop-up</h1>
+        <hr class="w3-opacity">
+        <p><button class="w3-button w3-block w3-indigo w3-round" onclick="load_control()"><i class="fa fa-tablet"></i>&nbsp Go to Control Panel </button></p>
+        <p><button class="w3-button w3-block w3-indigo w3-round" onclick="load_status()"><i class="fa fa-laptop"></i>&nbsp Go to Load Status Panel </button></p>
+      </div>
+    </div>
+{% endif %}
+</div>
+
+<!-- Container (About Section) -->
+<div onmouseover="audio_play()" class="w3-content w3-container w3-padding-64" id="about">
+  <h3 class="w3-center">ABOUT PROJECT</h3>
+  <p><b>Supervisory control system implementing NodeMCU ESP8266 </b>is a powerful way to manage and automate various processes remotely.<br>The ESP8266 microcontroller, with its built-in Wi-Fi capabilities, allows for real-time monitoring and control of devices over the internet.<br>Integrating Django with supervisory control system implementing NodeMCU ESP8266 creates a powerful IoT solution for remote monitoring and automation. Django, a robust web framework, serves as the backend to manage data, user authentication, and device interactions.</p>
+  <div class="w3-row">
+    <div class="w3-center w3-padding-large">
+      <img src="{% static 'about.png' %}" style="width:100%" class="w3-hover-opacity" alt="Block Diagram">
+    </div>
+  <p class="w3-large w3-center w3-padding-16">Block Diagram: <b> Supervisory Control System Implementing NodeMCU ESP8266</p>
+  </div>
+</div>
+
+<!-- Second Parallax Image with Portfolio Text -->
+<div class="bgimg-2 w3-display-container w3-opacity-min">
+</div>
+
+<!-- Container (Portfolio Section) -->
+<div class="w3-content w3-container w3-padding-64" id="portfolio">
+  <h3 class="w3-center">OUR TEAM MEMBERS</h3>
+  <p class="w3-center"><em><b>Supervisory Control System implementing NodeMCU ESP8266</b> Project Members<br> Click on the images to make them bigger</em></p><br>
+
+  <div class="w3-row-padding w3-center">
+    <div class="w3-col m3">
+      <img src="{% static 'pic_1.jpg' %}" style="width:100%" onclick="onClick(this)" class="w3-circle w3-hover-opacity" alt="Boss">
+  <h5>HIMANSHU KUMAR</h5>
+  <h5>Designer & Developer</h5>
+    </div>
+
+    <div class="w3-col m3">
+      <img src="{% static 'pic_2.jpg' %}" style="width:98%" onclick="onClick(this)" class="w3-circle w3-hover-opacity" alt="Member 1">
+  <h5>YASV DARSHAN MAURYA</h5>
+  <h5>Assistant & Support</h5>
+    </div>
+
+    <div class="w3-col m3">
+      <img src="{% static 'pic_3.jpg' %}" style="width:88%" onclick="onClick(this)" class="w3-circle w3-hover-opacity" alt="Member 2">
+  <h5>VIVEK GUPTA</h5>
+  <h5>Assistant & Support</h5>
+    </div>
+
+    <div class="w3-col m3">
+      <img src="{% static 'pic_4.jpg' %}" style="width:100%" onclick="onClick(this)" class="w3-circle w3-hover-opacity" alt="Member 3">
+  <h5>RATNESH MISHRA</h5>
+  <h5>Architecturer</h5>
+</div>
+</div>
+
+<!-- Modal for full size images on click-->
+<div id="modal01" class="w3-modal w3-black" onclick="this.style.display='none'">
+  <span class="w3-button w3-large w3-black w3-display-topright" title="Close Modal Image"><i class="fa fa-remove"></i></span>
+  <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+    <img id="img01" class="w3-image">
+    <p id="caption" class="w3-opacity w3-large"></p>
+  </div>
+</div>
+
+<!-- Third Parallax Image with Portfolio Text -->
+<div class="bgimg-3 w3-display-container w3-opacity-min">
+  <div class="w3-display-middle">
+
+  </div>
+</div>
+
+<!-- Container (Contact Section) -->
+<div onmouseover="audio_pause()" class="w3-content w3-container w3-padding-64" id="contact">
+  <h3 class="w3-center">CONTACT US</h3>
+  <p class="w3-center"><em>We'd love your feedback!</em></p>
+
+  <div class="w3-row w3-padding-32 w3-section">
+
+   <div class="w3-col m4 w3-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3577.157542766755!2d82.0789280762173!3d26.288992327024506!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sknit%20sultanpur!5e0!3m2!1sen!2sin!4v1746291740456!5m2!1sen!2sin" width="290px" height="270" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+   </div>
+
+    <div class="w3-col m8 w3-panel">
+      <div class="w3-large w3-margin-bottom">
+        <i class="fa fa-map-marker fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> KNIT Sultanpur, Uttar Pradesh-228118<br>
+        <i class="fa fa-phone fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Phone: +91 9520943071<br>
+        <i class="fa fa-envelope fa-fw w3-hover-text-black w3-xlarge w3-margin-right"></i> Email: himanshu.228302@knit.ac.in<br>
+      </div>
+      <p>Swing by for a cup of <i class="fa fa-coffee"></i>, or leave me a note:</p>
+      <form action="/AUTHENTICATION/feedback">
+        <div class="w3-row-padding" style="margin:0 -16px 8px -16px">
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Name" required name="Name">
+          </div>
+          <div class="w3-half">
+            <input class="w3-input w3-border" type="text" placeholder="Email" required name="Email">
+          </div>
+        </div>
+        <input class="w3-input w3-border" type="text" placeholder="Message" required name="Message">
+        <button class="w3-button w3-black w3-right w3-section" type="submit">
+          <i class="fa fa-paper-plane"></i> SEND MESSAGE
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+</div>
+
+<audio id="audioPlayer" src="{% static 'audio_1.mp3' %}"></audio>
+
+<footer class="w3-container w3-padding-32 w3-theme-d1 w3-center">
+  <div style="position:relative;bottom:100px;z-index:1;" class="w3-tooltip w3-right">
+    <span class="w3-text w3-light-grey w3-padding w3-teal w3-hide-small">Go To Top</span>   
+    <a class="w3-button w3-theme" href="#home"><span class="w3-xlarge">
+    <i class="fa fa-chevron-circle-up"></i></span></a>
+  </div>
+</footer>
+ 
+<script>
+
+window.addEventListener("pageshow", function (event) {
+  var historyTraversal = event.persisted,
+    perf = window.performance,
+    perfEntries =
+      perf && perf.getEntriesByType && perf.getEntriesByType("navigation"),
+    perfEntryType = perfEntries && perfEntries[0] && perfEntries[0].type,
+    navigationType = perf && perf.navigation && perf.navigation.type;
+  if (
+    historyTraversal ||
+    perfEntryType === "back_forward" ||
+    navigationType === 2 
+  ) {
+    window.location.reload();
+  }
+});
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+
+// Change style of navbar on scroll
+window.onscroll = function() {myFunction()};
+function myFunction() {
+    var navbar = document.getElementById("myNavbar");
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+        navbar.className = "w3-bar" + " w3-card" + " w3-animate-top" + " w3-white";
+    } else {
+        navbar.className = navbar.className.replace(" w3-card w3-animate-top w3-white", "");
+    }
+}
+
+function load_control() {
+  var a = document.createElement('a');
+  a.href = "/CONTROL_PANEL_1/show";
+  a.click();
+}
+
+function load_status() {
+  var b = document.createElement('a');
+  b.href = "/CONTROL_PANEL_1/Data";
+  b.click();
+}
+
+function audio_play() {
+   audioPlayer.play();
+}
+function audio_pause() {
+   audioPlayer.pause();
+}
+
+
+</script>
+
+</body>
+</html>
